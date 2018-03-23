@@ -1,0 +1,8 @@
+[master]
+rasp consul_node_name=rasp
+
+[nodes]
+dingle consul_node_name=dingle
+straw consul_node_name=straw
+marion consul_node_name=marion
+schnauz consul_node_name=schnauz

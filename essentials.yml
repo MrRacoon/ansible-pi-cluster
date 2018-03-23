@@ -1,0 +1,13 @@
+---
+- hosts: berries
+  remote_user: root
+  become: true
+  tasks:
+    - name: Install vim
+      apt: name=vim state=latest
+    - name: Install git
+      apt: name=git state=latest
+    - name: Install zsh
+      apt: name=zsh state=latest
+    - name: Install screen
+      apt: name=screen state=latest
