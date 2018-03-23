@@ -1,0 +1,8 @@
+{
+  "data_dir": "{{ consul_data_dir | default('/var/consul') }}",
+  "node_name": "{{ consul_node_name | default(ansible_hostname) }}",
+  "datacenter": "{{ consul_datacenter | default('main') }}",
+  "start_join": ["{{ consul_join | mandatory }}"],
+  "bind_addr": "{{ ansible_default_ipv4.address }}",
+  "enable_syslog": false
+}

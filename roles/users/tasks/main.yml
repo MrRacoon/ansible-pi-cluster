@@ -1,0 +1,9 @@
+---
+- name: Add user, racoon
+  user:
+    name: racoon
+    comment: "Erik Sutherland"
+    uid: 1213
+    shell: /usr/bin/zsh
+    group: sudo
+    home: /tmp/racoon

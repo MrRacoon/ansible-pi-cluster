@@ -1,0 +1,6 @@
+---
+  - name: Add consul to dnsmasq
+    lineinfile: dest=/etc/dnsmasq.conf state=present line='server=/consul/127.0.0.1#8600'
+
+  - name: Restart dnsmasq
+    shell: service dnsmasq force-reload

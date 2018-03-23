@@ -1,0 +1,27 @@
+---
+# - name: Rm Consul Zip
+# command: rm /tmp/consul.zip removes=/tmp/consul.zip
+
+ - name: Download Consul arm64
+   get_url: url=https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm64.zip dest=/tmp/consul.zip
+
+ - name: Download Unzip
+   apt: name=unzip state=latest
+
+ - name: unzip consul
+   command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
+
+ - name: opt consul
+   command: mv /tmp/consul /opt/consul creates=/opt/consul
+
+ - name: etc consul
+   command: mkdir /etc/consul creates=/etc/consul
+
+ - name: log consul
+   command: mkdir /var/log/consul creates=/var/log/consul
+
+ - name: data consul
+   command: mkdir /var/consul creates=/var/consul
+
+ - name: supervise consuat
+   template: src=supervisor.j2 dest=/etc/supervisor/conf.d/coatsul.conf
