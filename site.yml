@@ -1,3 +1,3 @@
 ---
-- import_playbook: masters.yml 
-- import_playbook: nodes.yml
+- include: masters.yml
+- include: nodes.yml

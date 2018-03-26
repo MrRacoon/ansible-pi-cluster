@@ -8,3 +8,5 @@
     - users
     - consul
     - dnsmasq
+    - consul_agent
+    - dnsmasq_consul

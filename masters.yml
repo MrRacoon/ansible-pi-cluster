@@ -1,7 +1,10 @@
 ---
 - hosts: masters
-  remote_user: pi
-  become: true
+  remote_user: root
   roles:
     - essentials
     - users
+    - consul
+    - dnsmasq
+    - dnsmasq_consul
+    - consul_server

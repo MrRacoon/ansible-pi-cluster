@@ -1,27 +1,36 @@
 ---
-# - name: Rm Consul Zip
-# command: rm /tmp/consul.zip removes=/tmp/consul.zip
+# - name: Turn off dnsmasq
+#   service: name=dnsmasq state=stopped
 
- - name: Download Consul arm64
-   get_url: url=https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm64.zip dest=/tmp/consul.zip
+# - name: Remove previous build artifacts
+#   file: "name={{ item }} state=absent"
+#   with_items:
+#     - /opt/consul
+#     - /tmp/consul
+#     - /tmp/consul.zip
 
- - name: Download Unzip
-   apt: name=unzip state=latest
+- name: Download Consul
+  get_url:
+    url: https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm.zip
+    dest: /tmp/consul.zip
+    mode: 0777
 
- - name: unzip consul
-   command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
+- name: Download Unzip
+  apt: name=unzip state=latest
 
- - name: opt consul
-   command: mv /tmp/consul /opt/consul creates=/opt/consul
+- name: unzip consul
+  command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
 
- - name: etc consul
-   command: mkdir /etc/consul creates=/etc/consul
+- name: opt consul
+  command: mv /tmp/consul /opt/consul creates=/opt/consul
 
- - name: log consul
-   command: mkdir /var/log/consul creates=/var/log/consul
+- name: ensure directories
+  file:
+    path: "{{ item }}"
+  with_items:
+    - /etc/consul
+    - /var/log/consul
+    - /var/consul
 
- - name: data consul
-   command: mkdir /var/consul creates=/var/consul
-
- - name: supervise consuat
-   template: src=supervisor.j2 dest=/etc/supervisor/conf.d/coatsul.conf
+- name: supervise consul
+  template: src=supervisor.j2 dest=/etc/supervisor/conf.d/consul.conf
