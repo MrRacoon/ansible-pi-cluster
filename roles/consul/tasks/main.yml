@@ -9,20 +9,20 @@
 #     - /tmp/consul
 #     - /tmp/consul.zip
 
-- name: Download Consul
-  get_url:
-    url: https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm.zip
-    dest: /tmp/consul.zip
-    mode: 0777
+# - name: Download Consul
+#   get_url:
+#     url: https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm.zip
+#     dest: /tmp/consul.zip
+#     mode: 0777
 
-- name: Download Unzip
-  apt: name=unzip state=latest
-
-- name: unzip consul
-  command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
-
-- name: opt consul
-  command: mv /tmp/consul /opt/consul creates=/opt/consul
+# - name: Download Unzip
+#   apt: name=unzip state=latest
+#
+# - name: unzip consul
+#   command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
+#
+# - name: opt consul
+#   command: mv /tmp/consul /opt/consul creates=/opt/consul
 
 - name: ensure directories
   file:
