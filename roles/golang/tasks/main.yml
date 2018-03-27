@@ -2,4 +2,4 @@
 - name: Install Go
   apt:
     name: golang
-    state: installed
+    state: removed
