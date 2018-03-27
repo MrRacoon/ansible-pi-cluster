@@ -5,11 +5,11 @@
   - name: Bind dnsmasq to localhost
     lineinfile: dest=/etc/dnsmasq.conf state=present line='listen-address=127.0.0.1'
 
-  - name: Add localhost to resolv.conf
-    lineinfile: dest=/etc/resolv.conf state=present line='nameserver 127.0.0.1' insertbefore=BOF
-
   - name: user=root dnsmasq
     lineinfile: dest=/etc/dnsmasq.conf state=present line='user=root'
+
+  - name: Add localhost to resolv.conf
+    lineinfile: dest=/etc/resolv.conf state=present line='nameserver 127.0.0.1' insertbefore=BOF
 
   - name: Launch dnsmasq
     service: name=dnsmasq state=started

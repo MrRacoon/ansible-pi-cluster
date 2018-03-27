@@ -1,0 +1,21 @@
+---
+- name: check for docker bin
+  stat:
+    path: /usr/bin/docker
+  register: docker
+
+- name: check for docker install script
+  stat:
+    path: /tmp/get-docker.sh
+  register: dockerInstallScript
+
+- name: Get docker install script
+  get_url:
+    url: https://get.docker.com
+    dest: /tmp/get-docker.sh
+  when: (docker.stat.exists == False) and
+        (dockerInstallScript.stat.exists == False)
+
+- name: Install docker
+  shell: "sudo sh /tmp/get-docker.sh"
+  when: (docker.stat.exists == False)

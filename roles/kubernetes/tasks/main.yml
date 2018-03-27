@@ -1,0 +1,45 @@
+---
+- name: check kube install
+  stat:
+    path: /usr/bin/kubeadm
+  register: kubeInstall
+
+- name: Install dependencies
+  apt:
+    name: apt-transport-https
+    state: installed
+  when: kubeInstall.stat.exists == False
+
+- name: Install apt-key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  when: kubeInstall.stat.exists == False
+
+- name: Ensure apt.list entry
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+  when: kubeInstall.stat.exists == False
+
+- name: Update package repositories
+  apt:
+    update_cache: true
+  when: kubeInstall.stat.exists == False
+
+- name: Get kube*
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - kubeadm
+    - kubectl
+    - kubelet
+  when: kubeInstall.stat.exists == False
+
+- name: Reload kubelet
+  systemd:
+    daemon_reload: true
+    name: kubectl
+    state: restarted
+  when: kubeInstall.stat.exists == False
