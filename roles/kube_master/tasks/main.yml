@@ -1,0 +1,3 @@
+---
+# - name: Initialize the master
+#   shell: "kubeadm init --config=/etc/kubeadm_config.yml {{ kubeadm_flags }} | tee /kubeadm.init.out"

@@ -1,0 +1,5 @@
+---
+- hosts: kube_nodes
+  remote_user: root
+  roles:
+    - kube_node

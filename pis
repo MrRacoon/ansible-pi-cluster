@@ -1,11 +1,16 @@
-[masters]
-192.168.0.200 consul_node_name=rasp
-192.168.0.201 consul_node_name=dingle
+[consul_masters]
+192.168.0.200
+192.168.0.201
 
-[nodes]
-192.168.0.202 consul_node_name=straw
-192.168.0.203 consul_node_name=marion
-192.168.0.205 consul_node_name=schnauz
+[kube_masters]
+192.168.0.205
 
-[beta]
-192.168.0.205 consul_node_name=schnauz
+
+[consul_nodes]
+192.168.0.202
+192.168.0.203
+192.168.0.205
+
+[kube_nodes]
+192.168.0.203
+192.168.0.202

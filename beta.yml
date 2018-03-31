@@ -1,6 +1,0 @@
----
-- hosts: beta
-  remote_user: root
-  roles:
-    - kubernetes
-    - kubernetes_master

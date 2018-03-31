@@ -1,11 +1,9 @@
 ---
-- hosts: nodes
+- hosts: consul_nodes
   remote_user: root
   vars:
     consul_join: "192.168.0.200"
   roles:
-    - essentials
-    - users
     - consul
     - dnsmasq
     - consul_agent

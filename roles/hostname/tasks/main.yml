@@ -1,0 +1,4 @@
+---
+- name: set the node's hostname
+  hostname:
+    name: "{{ node_name }}"

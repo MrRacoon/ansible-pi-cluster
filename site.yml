@@ -1,3 +1,6 @@
 ---
-- include: masters.yml
-- include: nodes.yml
+- include: base.yml
+- include: consul_masters.yml
+- include: consul_nodes.yml
+- include: kube_masters.yml
+- include: kube_nodes.yml

@@ -16,17 +16,26 @@
     state: present
   when: kubeInstall.stat.exists == False
 
+#
+# echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list
+#
 - name: Ensure apt.list entry
   apt_repository:
     repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
     state: present
   when: kubeInstall.stat.exists == False
 
+#
+# sudo apt-get update
+#
 - name: Update package repositories
   apt:
     update_cache: true
   when: kubeInstall.stat.exists == False
 
+#
+# sudo apt-get install kubeadm kubectl kubelet
+#
 - name: Get kube*
   apt:
     name: "{{ item }}"
@@ -43,3 +52,32 @@
     name: kubectl
     state: restarted
   when: kubeInstall.stat.exists == False
+
+# Swapoff
+
+- name: Remove Swap
+  shell: "swapoff -a"
+
+#
+# Boot Params
+#
+- name: Copy /boot/cmdline.txt
+  template:
+    src: cmdline.j2
+    dest: /boot/cmdline.txt
+
+- name: Copy config
+  template:
+    src: kubeadm_config.j2
+    dest: /etc/kubeadm_config.yml
+
+
+
+# - name: Drain the node
+#   shell: "kubectl drain {{ node_name }} --delete-local-data --force --ignore-daemonsets"
+
+# - name: Deleting the node
+#   shell: "kubectl delete node {{ node_name }}"
+
+# - name: Reset the master
+#   shell: "kubeadm reset"

@@ -1,9 +1,7 @@
 ---
-- hosts: masters
+- hosts: consul_masters
   remote_user: root
   roles:
-    - essentials
-    - users
     - consul
     - dnsmasq
     - dnsmasq_consul
