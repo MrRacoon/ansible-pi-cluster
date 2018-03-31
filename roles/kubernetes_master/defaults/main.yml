@@ -1,0 +1,2 @@
+---
+kubeadm_flags: '--ignore-preflight-errors=SystemVerification'

@@ -1,32 +1,42 @@
 ---
+- name: Check for consul_data_dir
+  stat:
+    path: /bin/consul
+  register: consul
+
 # - name: Turn off dnsmasq
 #   service: name=dnsmasq state=stopped
 
-# - name: Remove previous build artifacts
-#   file: "name={{ item }} state=absent"
-#   with_items:
-#     - /opt/consul
-#     - /tmp/consul
-#     - /tmp/consul.zip
+- name: Download Consul
+  get_url:
+    url: https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm.zip
+    dest: /tmp/consul.zip
+    mode: 0777
+  when: consul.stat.exists == False
 
-# - name: Download Consul
-#   get_url:
-#     url: https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm.zip
-#     dest: /tmp/consul.zip
-#     mode: 0777
+- name: Download Unzip
+  apt: name=unzip state=latest
+  when: consul.stat.exists == False
 
-# - name: Download Unzip
-#   apt: name=unzip state=latest
-#
-# - name: unzip consul
-#   command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
-#
-# - name: opt consul
-#   command: mv /tmp/consul /opt/consul creates=/opt/consul
+- name: unzip consul
+  command: unzip /tmp/consul.zip -d /tmp creates=/tmp/consul
+  when: consul.stat.exists == False
+
+- name: opt consul
+  command: mv /tmp/consul /bin/consul creates=/bin/consul
+  when: consul.stat.exists == False
+
+- name: Remove previous build artifacts
+  file: "name={{ item }} state=absent"
+  with_items:
+    - /opt/consul
+    - /tmp/consul
+    - /tmp/consul.zip
 
 - name: ensure directories
   file:
     path: "{{ item }}"
+    state: directory
   with_items:
     - /etc/consul
     - /var/log/consul

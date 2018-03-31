@@ -1,8 +1,8 @@
 [masters]
 192.168.0.200 consul_node_name=rasp
+192.168.0.201 consul_node_name=dingle
 
 [nodes]
-192.168.0.201 consul_node_name=dingle
 192.168.0.202 consul_node_name=straw
 192.168.0.203 consul_node_name=marion
 192.168.0.205 consul_node_name=schnauz

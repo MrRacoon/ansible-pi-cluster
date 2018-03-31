@@ -1,0 +1,45 @@
+---
+# - name: Turn off swap
+#   shell: "dphys-swapfile swapoff"
+#
+# - name: uninstall swap
+#   shell: "dphys-swapfile uninstall"
+#
+# - name: Remove Swap
+#   shell: "update-rc.d dphys-swapfile remove"
+
+- name: Copy config
+  template:
+    src: kubeadm_config.j2
+    dest: /etc/kubeadm_config.yml
+    creates: /etc/kubeadm_config.yml
+  when: kubeadmConf.stat.exists == False
+
+- name: Check boot params
+  stat:
+    path: /boot/cmdline.txt
+  register: bootParams
+
+- name: Copy config
+  template:
+    src: cmdline.j2
+    dest: /boot/cmdline.txt
+    creates: /boot/cmdline.txt
+  when: bootParams.stat.exists == False
+
+# Incase you need to delete the node and reset the build, run this
+#
+# - name: Drain the node
+#   shell: "kubectl drain {{ node_name }} --delete-local-data --force --ignore-daemonsets"
+#
+# - name: Deleting the node
+#   shell: "kubectl delete node {{ node_name }}"
+
+
+# If you never got the thing built, and need to try again, run this
+#
+# - name: Reset the master
+#   shell: "kubeadm reset"
+#
+# - name: Initialize the master
+#   shell: "kubeadm init --config=/etc/kubeadm_config.yml {{ kubeadm_flags }} | tee /kubeadm.init.out"

@@ -1,7 +1,7 @@
 ---
-- name: check kube install
+- name: Check kube install
   stat:
-    path: /usr/bin/kubeadm
+    path: /usr/bin/kubectl
   register: kubeInstall
 
 - name: Install dependencies

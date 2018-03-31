@@ -17,5 +17,31 @@
         (dockerInstallScript.stat.exists == False)
 
 - name: Install docker
-  shell: "sudo sh /tmp/get-docker.sh"
+  become: true
+  shell: "sh /tmp/get-docker.sh"
   when: (docker.stat.exists == False)
+
+# - name: install helpers
+#   apt:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#     - apt-transport-https
+#     - ca-certificates
+#     - curl
+#     - gnupg2
+#     - software-properties-common
+#   when: (docker.stat.exists == False)
+#
+# - name: Add docker to apt
+#   apt_repository:
+#     repo: deb [arch=armhf] https://download.docker.com/linux/debian stretch stable
+#     state: present
+#   when: (docker.stat.exists == False)
+#
+# - name: Install docker
+#   apt:
+#     update_cache: true
+#     name: docker-ce
+#     state: removed
+#   when: (docker.stat.exists == False)
