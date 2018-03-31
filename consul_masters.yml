@@ -1,6 +1,6 @@
 ---
 - hosts: consul_masters
-  remote_user: root
+  become: true
   roles:
     - consul
     - dnsmasq

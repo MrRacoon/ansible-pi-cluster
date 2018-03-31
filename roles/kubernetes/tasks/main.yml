@@ -49,7 +49,7 @@
 - name: Reload kubelet
   systemd:
     daemon_reload: true
-    name: kubectl
+    name: kubelet
     state: restarted
   when: kubeInstall.stat.exists == False
 

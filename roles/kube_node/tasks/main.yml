@@ -1,3 +1,3 @@
 ---
-- name: Join a cluster
-  shell: "kubeadm join 192.168.0.205:6443 --token 9a7pka.6645kd7zipc75mke --discovery-token-ca-cert-hash sha256:38b71059f005241187fd77ab308244872ed12dcf37874031101247fbf9b2c9c6"
+# - name: Join a cluster
+#   shell: "kubeadm join 192.168.0.205:6443 --token 9a7pka.6645kd7zipc75mke --discovery-token-ca-cert-hash sha256:38b71059f005241187fd77ab308244872ed12dcf37874031101247fbf9b2c9c6"

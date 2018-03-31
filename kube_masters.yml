@@ -1,5 +1,5 @@
 ---
 - hosts: kube_masters
-  remote_user: root
+  become: true
   roles:
     - kube_master

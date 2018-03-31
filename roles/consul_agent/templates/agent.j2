@@ -2,7 +2,7 @@
   "data_dir": "{{ consul_data_dir | default('/var/consul') }}",
   "node_name": "{{ node_name | default(ansible_hostname) }}",
   "datacenter": "{{ consul_datacenter | default('main') }}",
-  "start_join": ["{{ consul_join | mandatory }}"],
+  "start_join": {{ groups.consul_masters | list | to_json | mandatory }},
   "bind_addr": "{{ ansible_default_ipv4.address }}",
   "enable_syslog": false
 }
