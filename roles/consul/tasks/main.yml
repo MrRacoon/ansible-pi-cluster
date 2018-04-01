@@ -38,7 +38,7 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - /etc/consul
+    - /etc/consul.d
     - /var/log/consul
     - /var/consul
 

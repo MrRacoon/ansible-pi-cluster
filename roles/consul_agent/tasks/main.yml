@@ -1,6 +1,6 @@
 ---
   - name: Set Up Consul Agent Conf
-    template: src=agent.j2 dest=/etc/consul/agent.json
+    template: src=agent.j2 dest=/etc/consul.d/agent.json
 
   - name: Restart Consul
     supervisorctl: name=consul state=restarted
