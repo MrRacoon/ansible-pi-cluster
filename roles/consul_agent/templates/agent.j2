@@ -4,5 +4,6 @@
   "datacenter": "{{ consul_datacenter | default('main') }}",
   "start_join": {{ groups.consul_masters | list | to_json | mandatory }},
   "bind_addr": "{{ ansible_default_ipv4.address }}",
-  "enable_syslog": false
+  "enable_syslog": false,
+  "enable_script_checks": true
 }

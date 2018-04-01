@@ -42,5 +42,16 @@
     - /var/log/consul
     - /var/consul
 
+- name: Add consul checks
+  template:
+    src: "{{ item }}.check.j2"
+    dest: "/etc/consul.d/{{ item }}.chech.json"
+  with_items:
+    - mem
+    - lsblk
+    - uptime
+    - disk
+
+
 - name: supervise consul
   template: src=supervisor.j2 dest=/etc/supervisor/conf.d/consul.conf

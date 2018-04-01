@@ -1,21 +1,8 @@
 ---
   - name: Add consul to dnsmasq
-    lineinfile:
-      dest: /etc/dnsmasq.conf
-      state: present
-      line: 'server=/consul/127.0.0.1#8600'
-
-  - name: Add google to dnsmasq 1
-    lineinfile:
-      dest: /etc/dnsmasq.conf
-      state: present
-      line: 'server=8.8.8.8'
-
-  - name: Add google to dnsmasq 2
-    lineinfile:
-      dest: /etc/dnsmasq.conf
-      state: present
-      line: 'server=8.8.7.7'
+    template:
+      src: consul.conf
+      dest: /etc/dnsmasq.d/consul.conf
 
   - name: Restart dnsmasq
     service:
