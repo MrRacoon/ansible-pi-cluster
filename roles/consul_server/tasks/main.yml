@@ -3,4 +3,4 @@
     template: src=agent.j2 dest=/etc/consul.d/agent.json
 
   - name: Restart Consul
-    supervisorctl: name=consul state=restarted
+    service: name=consul state=restarted

@@ -1,3 +1,6 @@
 ---
 # - name: Initialize the master
 #   shell: "kubeadm init --config=/etc/kubeadm_config.yml {{ kubeadm_flags }} | tee /kubeadm.init.out"
+
+# - name: Apply weave network
+# shell: "kubectl apply -f \"https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')\""

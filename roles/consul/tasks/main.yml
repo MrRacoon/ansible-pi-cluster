@@ -45,7 +45,7 @@
 - name: Add consul checks
   template:
     src: "{{ item }}.check.j2"
-    dest: "/etc/consul.d/{{ item }}.chech.json"
+    dest: "/etc/consul.d/{{ item }}.check.json"
   with_items:
     - mem
     - lsblk
@@ -53,5 +53,5 @@
     - disk
 
 
-- name: supervise consul
-  template: src=supervisor.j2 dest=/etc/supervisor/conf.d/consul.conf
+- name: Install systemd unit.service file
+  template: src=consul.service.j2 dest=/etc/systemd/system/consul.service
