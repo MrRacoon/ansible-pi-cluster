@@ -2,7 +2,6 @@
 - hosts: consul_masters
   become: true
   roles:
-    - consul
     - dnsmasq
     - dnsmasq_consul
     - consul_server
