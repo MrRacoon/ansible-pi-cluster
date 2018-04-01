@@ -1,7 +1,7 @@
 ---
-- hosts: consul_masters
+- hosts: consul_servers
   become: true
   roles:
     - dnsmasq
-    - dnsmasq_consul
     - consul_server
+    - dnsmasq_consul

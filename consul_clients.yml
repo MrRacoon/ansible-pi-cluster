@@ -1,5 +1,5 @@
 ---
-- hosts: consul_nodes
+- hosts: consul_clients
   become: true
   vars:
     consul_join: "192.168.0.200"

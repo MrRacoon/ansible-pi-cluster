@@ -1,8 +1,8 @@
-[consul_masters]
+[consul_servers]
 192.168.0.200
 192.168.0.201
 
-[consul_nodes]
+[consul_clients]
 192.168.0.202
 192.168.0.203
 192.168.0.205
@@ -21,5 +21,5 @@ kube_masters
 kube_nodes
 
 [consul:children]
-consul_masters
-consul_nodes
+consul_servers
+consul_clients
