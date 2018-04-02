@@ -16,19 +16,19 @@
       state: present
       line: 'user=root'
 
-  - name: Add localhost to resolv.conf
-    lineinfile:
-      dest: /etc/resolv.conf
-      state: absent
-      line: 'nameserver 127.0.0.1'
-      insertbefore: BOF
-
-  - name: Add port to resolv.conf
-    lineinfile:
-      dest: /etc/resolv.conf
-      state: absent
-      line: 'port 8600'
-      insertbefore: BOF
+  # - name: Add localhost to resolv.conf
+  #   lineinfile:
+  #     dest: /etc/resolv.conf
+  #     state: absent
+  #     line: 'nameserver 127.0.0.1'
+  #     insertbefore: BOF
+  #
+  # - name: Add port to resolv.conf
+  #   lineinfile:
+  #     dest: /etc/resolv.conf
+  #     state: absent
+  #     line: 'port 8600'
+  #     insertbefore: BOF
 
   - name: remove supervisorctl
     apt:
