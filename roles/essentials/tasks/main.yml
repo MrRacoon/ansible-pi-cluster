@@ -1,9 +1,0 @@
----
-  - name: Install Essential software
-    apt:
-      name: "{{ item }}"
-      state: latest
-    with_items:
-      - vim
-      - git
-      - screen

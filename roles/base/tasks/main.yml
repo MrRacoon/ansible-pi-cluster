@@ -1,0 +1,9 @@
+---
+- name: Install Common Software
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - vim
+    - git
+    - screen
