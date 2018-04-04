@@ -1,0 +1,5 @@
+---
+- hosts: nomad_clients
+  become: true
+  roles:
+    - nomad_client

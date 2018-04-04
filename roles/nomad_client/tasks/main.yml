@@ -1,0 +1,20 @@
+---
+- name: Set Up Nomad Agent Conf
+  template:
+    src: agent.j2
+    dest: /etc/nomad.d/agent.conf
+
+- name: Install consul service definition
+  template:
+    src: nomad.consul.j2
+    dest: /etc/consul.d/nomad.json
+
+- name: Reload Nomad
+  service:
+    name: nomad
+    state: restarted
+
+- name: Reload consul
+  service:
+    name: consul
+    state: reloaded

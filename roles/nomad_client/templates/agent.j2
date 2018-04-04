@@ -1,0 +1,11 @@
+bind_addr = "0.0.0.0" # the default
+
+data_dir  = "/var/lib/nomad"
+
+client {
+  enabled       = true
+  network_speed = 10
+  options {
+    "driver.raw_exec.enable" = "1"
+  }
+}

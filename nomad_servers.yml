@@ -1,0 +1,5 @@
+---
+- hosts: nomad_servers
+  become: true
+  roles:
+    - nomad_server

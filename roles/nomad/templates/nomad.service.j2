@@ -1,0 +1,15 @@
+[Unit]
+Description=nomad agent
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/nomad
+Environment=GOMAXPROCS=2
+Restart=on-failure
+ExecStart=/bin/nomad agent -config=/etc/nomad.d/agent.conf
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

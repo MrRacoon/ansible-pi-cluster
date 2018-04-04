@@ -2,5 +2,7 @@
 - include: base.yml
 - include: consul_servers.yml
 - include: consul_clients.yml
+- include: nomad_servers.yml
+- include: nomad_clients.yml
 - include: kube_masters.yml
 - include: kube_nodes.yml
