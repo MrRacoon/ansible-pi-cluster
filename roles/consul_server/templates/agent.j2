@@ -4,7 +4,6 @@
   "datacenter": "{{ consul_datacenter | default('main') }}",
   "bind_addr": "{{ ansible_default_ipv4.address }}",
   "server": true,
-  "bootstrap_expect": {{ groups.consul_servers | length }},
   "enable_syslog": false,
   "enable_script_checks": true,
   "ui": true
