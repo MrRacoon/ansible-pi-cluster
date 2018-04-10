@@ -4,8 +4,8 @@
     path: /bin/consul
   register: consul
 
-# - name: Turn off dnsmasq
-#   service: name=dnsmasq state=stopped
+- name: Turn off dnsmasq
+  service: name=dnsmasq state=stopped
 
 - name: Download Consul
   get_url:
@@ -29,8 +29,6 @@
 - name: Remove previous build artifacts
   file: "name={{ item }} state=absent"
   with_items:
-    - /opt/consul
-    - /tmp/consul
     - /tmp/consul.zip
 
 - name: ensure directories

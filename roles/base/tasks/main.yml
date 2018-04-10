@@ -5,5 +5,3 @@
     state: latest
   with_items:
     - vim
-    - git
-    - screen

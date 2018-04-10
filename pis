@@ -33,3 +33,7 @@ kube_nodes
 [consul:children]
 consul_servers
 consul_clients
+
+[nomad:children]
+nomad_servers
+nomad_clients
