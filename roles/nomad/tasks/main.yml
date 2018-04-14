@@ -4,9 +4,6 @@
     path: /bin/nomad
   register: nomad
 
-# - name: Turn off dnsmasq
-#   service: name=dnsmasq state=stopped
-
 - name: Download Nomad
   get_url:
     url: https://releases.hashicorp.com/nomad/0.7.1/nomad_0.7.1_linux_arm.zip
@@ -15,7 +12,9 @@
   when: nomad.stat.exists == False
 
 - name: Download Unzip
-  apt: name=unzip state=latest
+  apt:
+    name: unzip
+    state: latest
   when: nomad.stat.exists == False
 
 - name: unzip nomad
@@ -27,7 +26,10 @@
   when: nomad.stat.exists == False
 
 - name: Remove previous build artifacts
-  file: "name={{ item }} state=absent"
+  file:
+    name: "{{ item }}"
+    state: absent
+
   with_items:
     - /tmp/nomad.zip
 
@@ -41,4 +43,6 @@
     - /var/nomad
 
 - name: Install systemd unit.service file
-  template: src=nomad.service.j2 dest=/etc/systemd/system/nomad.service
+  template:
+    src: nomad.service.j2 
+    dest: /etc/systemd/system/nomad.service

@@ -4,9 +4,6 @@
     path: /bin/consul
   register: consul
 
-- name: Turn off dnsmasq
-  service: name=dnsmasq state=stopped
-
 - name: Download Consul
   get_url:
     url: https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_arm.zip
