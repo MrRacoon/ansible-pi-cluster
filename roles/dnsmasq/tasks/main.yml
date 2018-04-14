@@ -1,41 +1,27 @@
 ---
-  - name: Install dnsmasq
-    apt:
-      name: dnsmasq
-      state: latest
+- name: Install dnsmasq
+  apt:
+    name: dnsmasq
+    state: latest
 
-  - name: Bind dnsmasq to localhost
-    lineinfile:
-      dest: /etc/dnsmasq.conf
-      state: present
-      line: 'listen-address=127.0.0.1'
+- name: Bind dnsmasq to localhost
+  lineinfile:
+    dest: /etc/dnsmasq.conf
+    state: present
+    line: 'listen-address=127.0.0.1'
 
-  - name: user=root dnsmasq
-    lineinfile:
-      dest: /etc/dnsmasq.conf
-      state: present
-      line: 'user=root'
+- name: use root user for dnsmasq
+  lineinfile:
+    dest: /etc/dnsmasq.conf
+    state: present
+    line: 'user=root'
 
-  # - name: Add localhost to resolv.conf
-  #   lineinfile:
-  #     dest: /etc/resolv.conf
-  #     state: absent
-  #     line: 'nameserver 127.0.0.1'
-  #     insertbefore: BOF
-  #
-  # - name: Add port to resolv.conf
-  #   lineinfile:
-  #     dest: /etc/resolv.conf
-  #     state: absent
-  #     line: 'port 8600'
-  #     insertbefore: BOF
+- name: Add base dns settings
+  copy:
+    src: base.conf
+    dest: /etc/dnsmasq.d/base.conf
 
-  - name: remove supervisorctl
-    apt:
-      name: supervisor
-      state: absent
-
-  - name: Launch dnsmasq
-    service:
-      name: dnsmasq
-      state: started
+- name: (re)start dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted

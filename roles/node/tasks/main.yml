@@ -1,0 +1,46 @@
+---
+- name: create nodejs group
+  group:
+    name: nodejs
+
+- name: create nodejs user
+  user:
+    name: nodejs
+    uid: 7777
+    home: /opt/nodejs
+    group: nodejs
+
+- name: ensure nodejs /opt/nodejs/bin dir
+  file:
+    dest: /opt/nodejs/bin
+    group: nodejs
+    owner: nodejs
+    state: directory
+
+- name: get node binaries
+  get_url:
+    url: https://nodejs.org/dist/v{{ node_version }}/node-v{{ node_version }}-linux-armv7l.tar.xz
+    dest: /opt/nodejs/
+
+- name: unpack node binaries
+  unarchive:
+    remote_src: true
+    owner: nodejs
+    group: nodejs
+    src: /opt/nodejs/node-v8.11.1-linux-armv7l.tar.xz
+    dest: /opt/nodejs
+
+- name: place in bin
+  file:
+    src: "/opt/nodejs/bin/{{ item }}"
+    dest: "/opt/nodejs/node-v8.11.1-linux-armv7l/bin/{{ item }}"
+    state: link
+  with_items:
+    - node
+    - npm
+
+- name: include /opt/nodejs/bin in nodejs PATH
+  lineinfile:
+    dest: /opt/nodejs/.bashrc
+    state: present
+    line: 'export PATH=$HOME/bin:$PATH'
