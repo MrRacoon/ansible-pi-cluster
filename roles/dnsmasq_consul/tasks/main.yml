@@ -1,10 +1,10 @@
 ---
-  - name: Add consul to dnsmasq
-    template:
-      src: consul.conf
-      dest: /etc/dnsmasq.d/consul.conf
+- name: Add consul to dnsmasq
+  template:
+    src: consul.conf
+    dest: /etc/dnsmasq.d/consul.conf
 
-  - name: Restart dnsmasq
-    service:
-      name: dnsmasq
-      state: restarted
+- name: Restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
