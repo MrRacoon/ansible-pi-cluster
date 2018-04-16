@@ -1,5 +1,5 @@
 ---
 - hosts: webservers
   roles:
-    # - bare_repo
+    - git_server
     - consul_template

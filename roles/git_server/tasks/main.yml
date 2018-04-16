@@ -1,0 +1,35 @@
+---
+- name: Install git
+  apt:
+    name: git
+    state: installed
+
+- name: Ensure group
+  group:
+    name: git
+
+- name: Ensure user
+  user:
+    name: git
+    group: git
+    shell: /usr/bin/git-shell
+    home: "{{ git_home }}"
+
+- name: Install authorized_keys
+  authorized_key:
+    user: git
+    state: present
+    key: "https://github.com/{{ item }}.keys"
+  with_items: "{{ git_authed_users }}"
+
+- name: create dummy repo
+  command: "git init --bare {{ git_dummy_path }}.git"
+  args:
+    creates: /srv/git/myrepo.git/HEAD
+
+- name: cloning github repo {{ item }}
+  git:
+    bare: true
+    dest: "{{ git_home }}/{{ item }}"
+    repo: "https://github.com/{{ item }}.git"
+  with_items: "{{ github_repo_list }}"

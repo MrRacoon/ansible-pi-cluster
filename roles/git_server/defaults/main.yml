@@ -1,0 +1,8 @@
+---
+git_home: /opt/git
+git_dummy_path: "{{ git_home }}/dummy"
+git_dummy_repo: "git@localhost:{{ git_dummy_path }}.git"
+git_authed_users:
+  - MrRacoon
+github_repo_list:
+  - MrRacoon/tinyApp

@@ -1,0 +1,15 @@
+{
+  "service": {
+    "name": "git-server",
+    "tags": ["git", "repository", "build-server"],
+    "address": "",
+    "port": 22,
+    "enable_tag_override": false,
+    "checks": [
+      {
+        "id": "git-server",
+        "args": ["git", "clone", "{{ git_dummy_repo }}"]
+      }
+    ]
+  }
+}

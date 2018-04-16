@@ -1,5 +1,5 @@
 ---
-- name: install consul template
+- name: Check consul template install
   stat:
     path: /bin/consul-template
   register: ctBinary
