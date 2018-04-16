@@ -1,0 +1,9 @@
+{
+  "check": {
+    "id": "consul-template-running",
+    "name": "Consul Template",
+    "args": ["systemctl", "status", "consul-template"],
+    "interval": "10s",
+    "timeout": "1s"
+  }
+}

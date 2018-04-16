@@ -3,3 +3,8 @@
   service:
     name: consul-template
     state: restarted
+
+- name: restart consul
+  service:
+    name: consul
+    state: restarted

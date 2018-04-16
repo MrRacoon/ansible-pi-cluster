@@ -46,7 +46,8 @@
     src: "{{ item }}"
     dest: "/opt/consul-template/templates/{{ item }}"
   with_items:
-    fake-template
+    - fake-template
+    - app-config
   notify: restart consul-template
 
 - name: Configure consul template
@@ -58,4 +59,13 @@
     - name: fake-template
       src: /opt/consul-template/templates/fake-template
       dest: /opt/consul-template/fake
+    - name: app-config
+      src: /opt/consul-template/templates/app-config
+      dest: /opt/consul-template/app-config
   notify: restart consul-template
+
+- name: Install consul checks
+  template:
+    src: consul-agent.json.j2
+    dest: /etc/consul.d/consul-template.check.json
+  notify: restart consul
