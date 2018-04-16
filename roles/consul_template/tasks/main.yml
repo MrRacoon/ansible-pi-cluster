@@ -1,0 +1,61 @@
+---
+- name: install consul template
+  stat:
+    path: /bin/consul-template
+  register: ctBinary
+
+- name: install consul template
+  get_url:
+    url: https://releases.hashicorp.com/consul-template/0.19.4/consul-template_0.19.4_linux_arm.zip
+    dest: /tmp
+  when: ctBinary.stat.exists == False
+
+- name: Unzip
+  unarchive:
+    remote_src: true
+    src: /tmp/consul-template_0.19.4_linux_arm.zip
+    dest: /tmp
+  when: ctBinary.stat.exists == False
+
+- name: Create folder structure
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/consul-template
+    - /opt/consul-template/templates
+    - /opt/consul-template/configs
+
+- name: Move to bin
+  copy:
+    remote_src: true
+    src: /tmp/consul-template
+    dest: /bin
+    mode: 0755
+  when: ctBinary.stat.exists == False
+
+- name: Install service config
+  copy:
+    src: consul-template.service
+    dest: /etc/systemd/system/consul-template.service
+    mode: 0755
+  notify: restart consul-template
+
+- name: Include consul template templates
+  copy:
+    src: "{{ item }}"
+    dest: "/opt/consul-template/templates/{{ item }}"
+  with_items:
+    fake-template
+  notify: restart consul-template
+
+- name: Configure consul template
+  template:
+    src: consul-template-config.hcl.j2
+    dest: "/opt/consul-template/configs/{{ item.name }}.config"
+    mode: 0644
+  with_items:
+    - name: fake-template
+      src: /opt/consul-template/templates/fake-template
+      dest: /opt/consul-template/fake
+  notify: restart consul-template

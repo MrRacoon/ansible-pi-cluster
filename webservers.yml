@@ -1,6 +1,5 @@
 ---
 - hosts: webservers
-  become: true
   roles:
-    - dnsmasq
-    - node
+    # - bare_repo
+    - consul_template

@@ -30,14 +30,14 @@
     src: /opt/nodejs/node-v8.11.1-linux-armv7l.tar.xz
     dest: /opt/nodejs
 
-- name: place in bin
-  file:
-    src: "/opt/nodejs/bin/{{ item }}"
-    dest: "/opt/nodejs/node-v8.11.1-linux-armv7l/bin/{{ item }}"
-    state: link
-  with_items:
-    - node
-    - npm
+# - name: place in bin
+#   file:
+#     src: "/opt/nodejs/bin/{{ item }}"
+#     dest: "/opt/nodejs/node-v8.11.1-linux-armv7l/bin/{{ item }}"
+#     state: link
+#   with_items:
+#     - node
+#     - npm
 
 - name: include /opt/nodejs/bin in nodejs PATH
   lineinfile:

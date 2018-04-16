@@ -1,0 +1,14 @@
+template {
+  source               = "{{ item.src }}"
+  destination          = "{{ item.dest }}"
+  create_dest_dirs     = true
+  {% if item.cmd is defined %}
+  command              = "{{ item.cmd }}"
+  {% endif %}
+  command_timeout      = "60s"
+  error_on_missing_key = false
+  wait {
+    min = "2s"
+    max = "10s"
+  }
+}
